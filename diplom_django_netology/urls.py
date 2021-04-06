@@ -18,7 +18,7 @@ import debug_toolbar
 from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
-from shop.views import home
+from catalog.views import home
 
 urlpatterns = [
     path('', home),
