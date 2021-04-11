@@ -13,6 +13,7 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
+        ordering = ('-id',)
 
     def __str__(self):
         return self.name
@@ -35,7 +36,7 @@ class Product(models.Model):
     description = models.TextField(verbose_name='Описание')
 
     image = models.ImageField(
-        upload_to='catalog/images/',
+        upload_to='catalog/',
         verbose_name='Изображение',
     )
     slug = models.SlugField(unique=True)
