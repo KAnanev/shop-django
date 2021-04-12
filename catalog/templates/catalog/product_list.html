@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    {{ category }}
+    {{ category.name }}
 {% endblock %}
 {% block content %}
     {% if products_list %}
@@ -17,7 +17,6 @@
                 <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
             </form>
         </div>
-
     {% endfor %}
     </div>
         <div class="pagination">
@@ -37,17 +36,9 @@
                 {% endif %}
             </span>
         </div>
-
-
-
-
-
     {% else %}
         <div class="alert alert-dark" role="alert">
             Тут пока ничего нет!
         </div>
     {% endif %}
-
-
 {% endblock %}
-

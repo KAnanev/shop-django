@@ -6,7 +6,6 @@ from catalog.models import Product, Category
 
 class ProductListView(ListView):
     paginate_by = 2
-    template_name = 'catalog.html'
     context_object_name = 'products_list'
 
     def get_queryset(self):
