@@ -7,11 +7,10 @@
         <h1>{{ category.name }}</h1>
         <div class="row">
         {% for product in page_obj %}
-
         <div class="col-md-4">
             <h2>{{ product.title }}</h2>
-            <a href="{% url 'catalog' product.slug %}">
-                <img src="{{ product.image.url }}" width="180" alt="{{ product.slug }}">
+            <a href="{{ product.get_absolute_url}}">
+                <img src="{{ product.image.url }}" height="300" alt="{{ product.slug }}">
             </a>
             <form>
                 <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
@@ -25,11 +24,9 @@
                     <a href="?page=1">&laquo; В начало</a>
                     <a href="?page={{ page_obj.previous_page_number }}">назад</a>
                 {% endif %}
-
                 <span class="current">
                     Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
                 </span>
-
                 {% if page_obj.has_next %}
                     <a href="?page={{ page_obj.next_page_number }}">след.</a>
                     <a href="?page={{ page_obj.paginator.num_pages }}">пред. &raquo;</a>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -17,6 +18,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('catalog:product_list_by_category', kwargs={'category_slug': self.slug})
 
 
 class Product(models.Model):
@@ -48,6 +52,10 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('catalog:product_detail', kwargs={'product_slug': self.slug, 'category_slug': self.category.slug}
+        )
+
 
 class Review(models.Model):
 
@@ -63,7 +71,7 @@ class Review(models.Model):
         verbose_name='Имя',
     )
 
-    rating = models.IntegerField(verbose_name='Рейтинг')
+    rating = models.PositiveSmallIntegerField(verbose_name='Рейтинг')
     review = models.TextField(verbose_name='Отзыв')
 
     class Meta:

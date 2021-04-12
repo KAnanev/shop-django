@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load catalog_extras %}
+{% block title %}
+    {{ product.title }}
+{% endblock %}
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{{ product.title }} </h2>
+        <img src="{{ product.image.url }}" width="120">
+
+        <p>{{ product.description }}</p>
+        <form method="post" action="./cart/">
+          <input type="hidden" name="csrfmiddlewaretoken"
+                 value="N4vcBqzjoYkU7OTDuAT8hq8srpvYX44nJsswuP7e3EYg0Hq8DgxuR0eiXWbSr5RZ">
+          <input type="hidden" name="merchandise_id" value="1">
+          <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
+        </form>
+      </div>
+    </div>
+    <hr>
+    {% for reviews in product.reviews.get_queryset%}
+        <p>{{ reviews.rating|view_rating }}</p>
+        <span>{{ reviews.name }}</span>
+    <p> {{ reviews.review }}</p>
+        <hr>
+    {% endfor %}
+    <div class="row">
+      <div class="col-lg-6 col-md-8 col-sm-12">
+        <h4>Оставьте отзыв:</h4>
+            <form action="{{ product.get_absolute_url }}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Ваше имя:</label>
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    <label for="content">Ваш отзыв:</label>
+                    {{ form.review }}
+                </div>
+                {% for raiting in form.rating %}
+                    {{ raiting }}
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Оставить</button>
+            </form>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}
