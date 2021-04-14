@@ -10,8 +10,13 @@ class ProductListView(ListView):
     context_object_name = 'products_list'
 
     def get_queryset(self):
-        self.category = get_object_or_404(Category, slug=self.kwargs['category_slug'])
-        return Product.objects.filter(category__slug=self.category.slug)
+        self.category = get_object_or_404(
+            Category,
+            slug=self.kwargs['category_slug']
+        )
+        return Product.objects.filter(
+            category__slug=self.category.slug
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -32,28 +37,15 @@ class ProductDetail(DetailView):
 
     def post(self, request, *args, **kwargs):
         form = ReviewForm(request.POST, request.FILES)
+        self.object = super(ProductDetail, self).get_object()
+        context = super(ProductDetail, self).get_context_data()
+        context['form'] = ReviewForm
         if form.is_valid():
             new_review = form.save(commit=False)
-            new_review.product = super(ProductDetail, self).get_object()
+            new_review.product = self.object
             new_review.save()
 
-            self.object = self.get_object()
-            context = super(ProductDetail, self).get_context_data(**kwargs)
-            context['form'] = ReviewForm
-            return self.render_to_response(context=context)
-
         else:
-            self.object = self.get_object()
-            context = super(ProductDetail, self).get_context_data(**kwargs)
             context['form'] = form
-            return self.render_to_response(context=context)
 
-
-
-
-
-
-
-
-
-
+        return self.render_to_response(context=context)

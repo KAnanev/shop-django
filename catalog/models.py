@@ -2,7 +2,34 @@ from django.db import models
 from django.urls import reverse
 
 
+class Catalog(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Каталог',
+    )
+    slug = models.SlugField(unique=True)
+
+    class Meta:
+        verbose_name = 'Каталог'
+        verbose_name_plural = 'Каталоги'
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse(
+            'catalog:catalog',
+            kwargs={'catalog_slug': self.slug}
+        )
+
+
 class Category(models.Model):
+    catalog = models.ForeignKey(
+        Catalog,
+        on_delete=models.PROTECT,
+        related_name='categories',
+        verbose_name='Каталог',
+    )
 
     name = models.CharField(
         max_length=255,
@@ -20,7 +47,10 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('catalog:product_list_by_category', kwargs={'category_slug': self.slug})
+        return reverse(
+            'catalog:product_list_by_category',
+            kwargs={'category_slug': self.slug}
+        )
 
 
 class Product(models.Model):
@@ -53,7 +83,12 @@ class Product(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('catalog:product_detail', kwargs={'product_slug': self.slug, 'category_slug': self.category.slug}
+        return reverse(
+            'catalog:product_detail',
+            kwargs={
+                'product_slug': self.slug,
+                'category_slug': self.category.slug
+            }
         )
 
 
@@ -67,12 +102,17 @@ class Review(models.Model):
     )
 
     name = models.CharField(
-        max_length=255,
+        max_length=64,
         verbose_name='Имя',
     )
 
-    rating = models.PositiveSmallIntegerField(verbose_name='Рейтинг')
-    review = models.TextField(verbose_name='Отзыв')
+    rating = models.PositiveSmallIntegerField(
+        verbose_name='Рейтинг'
+    )
+    review = models.TextField(
+        max_length=255,
+        verbose_name='Отзыв'
+    )
 
     class Meta:
         verbose_name = 'Отзыв'

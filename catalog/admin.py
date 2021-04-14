@@ -1,12 +1,20 @@
 from django.contrib import admin
-from catalog.models import Category, Product, Review
+from catalog.models import Category, Product, Review, Catalog
 
 
+@admin.register(Catalog)
+class CatalogAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug',)
+    prepopulated_fields = {'slug': ('name',)}
+
+
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug',)
     prepopulated_fields = {'slug': ('name',)}
 
 
+@admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'category',)
     prepopulated_fields = {'slug': ('title',)}
@@ -14,12 +22,6 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('category',)
 
 
+@admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('name', 'product',  'rating',)
-
-
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Product, ProductAdmin)
-admin.site.register(Review, ReviewAdmin)
-
-
+    list_display = ('name', 'product', 'rating',)
