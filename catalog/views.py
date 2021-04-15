@@ -16,7 +16,7 @@ class ProductListView(ListView):
         )
         return Product.objects.filter(
             category__slug=self.category.slug
-        ).select_related('category__catalog')
+        ).select_related('category')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
