@@ -1,0 +1,35 @@
+{% load static %}
+{% load catalog_extras %}
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="./index.html">Просто магазин</a>
+  <img src="{% static 'logo.svg' %}" alt="" width="42" height="42">
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+          aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="./index.html">
+          Главная</a>
+      </li>
+
+      {% show_menu %}
+
+
+
+    </ul>
+    <a class="btn btn-outline-success my-2 my-sm-0" role="button"
+       href="./cart.html">
+      Корзина</a>
+
+
+    <a class="btn btn-outline-success my-2 my-sm-0" role="button"
+       href="./login.html">
+      Войти</a>
+
+  </div>
+</nav>

@@ -1,0 +1,33 @@
+{#{% load catalog_extras %}#}
+{#{% load cache %}#}
+{#{% block content %}#}
+{#    {% cache 1 menu%}#}
+{#        <li class="nav-item dropdown">#}
+{#            {% for catalog in catalog_list %}#}
+{#                {% if catalog.categories.count > 1 %}#}
+{#                    <div class="dropdown-menu" aria-labelledby="dropdown01">#}
+{#                        {% for category in catalog.categories.get_queryset %}#}
+{#                            <a class="nav-link dropdown-toggle" href="{{ category.get_absolut_url }}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ category }}</a>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                {% else %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{{ catalog.categories.first.slug }}"> {{ catalog }}</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#    {% endcache %}#}
+{#{% endblock %}#}
+
+
+{% for catalog in catalog_list %}
+    {{ catalog.categories.get_queryset }}
+    {% for category in catalog.categories.get_queryset %}#}
+                            <a href="{% url ''%}" > {{ category }}</a>
+                        {% endfor %}
+
+{% endfor %}
+
+
+
+

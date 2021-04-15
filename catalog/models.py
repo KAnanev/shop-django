@@ -16,12 +16,6 @@ class Catalog(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse(
-            'catalog:catalog',
-            kwargs={'catalog_slug': self.slug}
-        )
-
 
 class Category(models.Model):
     catalog = models.ForeignKey(

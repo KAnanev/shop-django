@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load catalog_extras %}
+{% load cache %}
+{% block title %}
+{% endblock %}
+{% block content %}
+    {% cache 600 menu %}
+    {% for catalog in catalog_list %}
+        {% if catalog.categories.count > 1 %}
+            {% for category in catalog.categories.get_queryset %}
+                <a href="{{ category.slug }}"> {{ category }}</a>
+            {% endfor %}
+        {% else %}
+            <a href="{{ catalog.categories.first.slug }}"> {{ catalog.categories.first }}</a>
+        {% endif %}
+    {% endfor %}
+    {% endcache %}
+{% endblock %}
