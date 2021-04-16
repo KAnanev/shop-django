@@ -1,32 +1,21 @@
-{#{% load catalog_extras %}#}
-{#{% load cache %}#}
-{#{% block content %}#}
-{#    {% cache 1 menu%}#}
-{#        <li class="nav-item dropdown">#}
-{#            {% for catalog in catalog_list %}#}
-{#                {% if catalog.categories.count > 1 %}#}
-{#                    <div class="dropdown-menu" aria-labelledby="dropdown01">#}
-{#                        {% for category in catalog.categories.get_queryset %}#}
-{#                            <a class="nav-link dropdown-toggle" href="{{ category.get_absolut_url }}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ category }}</a>#}
-{#                        {% endfor %}#}
-{#                    </div>#}
-{#                {% else %}#}
-{#                    <li class="nav-item">#}
-{#                        <a class="nav-link" href="{{ catalog.categories.first.slug }}"> {{ catalog }}</a>#}
-{#                    </li>#}
-{#                {% endif %}#}
-{#            {% endfor %}#}
-{#    {% endcache %}#}
-{#{% endblock %}#}
+{% load mptt_tags %}
 
-
-{% for catalog in catalog_list %}
-    {{ catalog.categories.get_queryset }}
-    {% for category in catalog.categories.get_queryset %}#}
-                            <a href="{% url ''%}" > {{ category }}</a>
-                        {% endfor %}
-
+{% for genre,structure in catalog|tree_info:"ancestors" %}
+    {% if not structure.ancestors and not structure.closed_levels %}<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ genre.get_absolute_url }}" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {% elif not structure.ancestors and structure.closed_levels %}<li class="nav-item"><a class="nav-link" href="{{ genre.get_absolute_url }}">
+    {% elif structure.new_level and structure.ancestors %}<div class="dropdown-menu" aria-labelledby="dropdown01"><a class="dropdown-item" href="{{ genre.get_absolute_url }}">
+    {% elif structure.ancestors%}<a class="dropdown-item" href="{{ genre.get_absolute_url }}">
+    {% endif %}
+        {{ genre.name }}</a>
+    {% for level in structure.closed_levels %}
+        {% if structure.ancestors%}</div>
+        {% else %}</li>
+        {% endif %}
+    {% endfor %}
 {% endfor %}
+
+
+
 
 
 

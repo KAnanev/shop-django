@@ -1,7 +1,5 @@
-from django.conf.urls.static import static
 from django.urls import path
 from catalog.views import ProductListView, ProductDetail
-from diplom_django_netology import settings
 
 app_name = 'catalog'
 

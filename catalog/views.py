@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from catalog.forms import ReviewForm
-from catalog.models import Product, Category, Review
+from catalog.models import Product, Category
 
 
 class ProductListView(ListView):
