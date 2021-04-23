@@ -11,19 +11,10 @@
 </head>
 <body class="" data-gr-c-s-loaded="true">
 
-{% include 'menu.html' %}
+
+{% block content %}{% endblock %}
 
 
-<main role="main">
-  <div class="container">
-    {% block content %}{% endblock %}
-  </div>
-</main>
-
-
-
-<hr>
-{% include 'footer.html' %}
 
 <script src="{% static 'jquery-3.3.1.slim.min.js' %}"></script>
 <script src="{% static 'popper.min.js' %}"></script>
