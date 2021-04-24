@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'catalog.apps.CatalogConfig',
     'account.apps.AccountConfig',
+    'cart.apps.CartConfig',
 
     # Древовидное меню
     'mptt',

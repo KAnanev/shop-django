@@ -12,9 +12,12 @@
             <a href="{{ product.get_absolute_url}}">
                 <img src="{{ product.image.url }}" height="300" alt="{{ product.slug }}">
             </a>
-            <form>
-                <input type="submit" class="btn btn-secondary" value="Добавить в корзину »">
-            </form>
+
+
+            {% include 'add_to_cart.html' %}
+
+
+
         </div>
     {% endfor %}
     </div>

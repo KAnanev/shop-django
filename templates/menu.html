@@ -14,16 +14,21 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="./index.html">
-          Главная</a>
+          Главная
+        </a>
       </li>
         {% include 'catalog/catalog_menu.html' %}
     </ul>
 
 
+
     {% if user.is_authenticated %}
         <div class="text-success">Пользователь: {{ user.get_username }}</div>
+    {% endif %}
 
-        <a class="btn btn-outline-success my-2 my-sm-0" role="button" href="./cart.html">Корзина</a>
+    <a class="btn btn-outline-success my-2 my-sm-0" role="button" href="{% url 'cart:cart' %}">Корзина</a>
+
+    {% if user.is_authenticated %}
         <a class="btn btn-outline-success my-2 my-sm-0" role="button" href="{% url 'logout'%}?next={{request.path}}">Выйти</a>
     {% else %}
         <a class="btn btn-outline-success my-2 my-sm-0" role="button" href="{% url 'login'%}?next={{request.path}}">Войти</a>
