@@ -10,14 +10,9 @@
         <div class="col-md-4">
             <h2>{{ product.title }}</h2>
             <a href="{{ product.get_absolute_url}}">
-                <img src="{{ product.image.url }}" height="300" alt="{{ product.slug }}">
+                <img src="{{ product.image.url }}" width="120" alt="{{ product.slug }}">
             </a>
-
-
             {% include 'add_to_cart.html' %}
-
-
-
         </div>
     {% endfor %}
     </div>
@@ -41,5 +36,4 @@
             Тут пока ничего нет!
         </div>
     {% endif %}
-    <hr>
 {% endblock %}
