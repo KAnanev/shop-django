@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+    {% include 'menu.html' %}
+
+    <main role="main">
+        <div class="container">
+            {% block catalog %}{% endblock %}
+        </div>
+    </main>
+
+    {% include 'footer.html' %}
+
+{% endblock %}
