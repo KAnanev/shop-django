@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "shop-django"
+version = "0.1.0"
+description = "Интернет-магазин на фреймворке Django"
+authors = ["KAnanev <ananevdeveloper@yandex.ru>"]
+license = "А"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+Django = "^3.2.5"
+django-debug-toolbar = "^3.2.1"
+django-mptt = "^0.12.0"
+Pillow = "^8.3.1"
+
+[tool.poetry.dev-dependencies]
+
+[tool.poetry.scripts]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
