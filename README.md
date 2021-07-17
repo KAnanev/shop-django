@@ -1,9 +1,11 @@
-# Диплом по курсу «Django: создание функциональных веб-приложений»
+# Интерент-магазин на Django
 
 ## Инструкция по установке:
+
 ### Docker установка:
-1. Если у вас не установлен Docker:
-- Установите [Docker](https://docs.docker.com/get-docker/)
+
+1. Если у вас не установлен Docker: Установите [Docker](https://docs.docker.com/get-docker/).
+
 2. Запустите контейнер:
 ```sh
 docker run --rm -p 80:8000 --name shop-django russrage/shop-django
@@ -29,11 +31,13 @@ python manage.py migrate
  python manage.py runserver --settings=settings.local
  ```
 5. Перейдите по ссылке: (http://127.0.0.1:8000)
-#### Тестовый суперпользователь: 
+
+#### Тестовый суперпользователь:
+
 Логин: admin@test.ru
 Пароль: admin
 
-<details><summary>## Задание на проект</summary> 
+<details><summary>Проектное задание</summary> 
 
 Разработать сайт интернет-магазина.
 Должна быть реализована клиентская часть сервиса и интерфейс администрирования.
