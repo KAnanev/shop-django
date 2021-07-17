@@ -1,29 +1,42 @@
 # Диплом по курсу «Django: создание функциональных веб-приложений»
 
+## Инструкция по установке:
+### Docker установка:
+1. Если у вас не установлен Docker:
+- Установите [Docker](https://docs.docker.com/get-docker/)
+2. Запустите контейнер:
+```sh
+docker run --rm -p 80:8000 --name shop-django russrage/shop-django
+```
+3. Перейдите по ссылке: (http://127.0.0.1)
 
+### Простая установка:
 
-## Инструкция по установке
+ 1. Установите зависимости:
+```sh
+python pip install -r requirements.txt
+```
+2. Выполните миграции:
+```sh
+python manage.py migrate
+```
+ 3. Загрузите тестовые данные в базу:
+ ```sh
+ python manage.py loaddata fixtures.json
+ ```
+ 4. Запустите тестовый сервер:
+  ```sh
+ python manage.py runserver --settings=settings.local
+ ```
+5. Перейдите по ссылке: (http://127.0.0.1:8000)
+#### Тестовый суперпользователь: 
+Логин: admin@test.ru
+Пароль: admin
 
-- Установите зависимости: python pip install -r requirements.txt
-
-- Выполните миграции: python manage.py migrate
-
-- Загрузите тестовые данные в базу: python manage.py loaddata fixtures.json
-
-- Запустите тестовый сервер python manage.py runserver --settings=settings.local
-
-- Тестовый суперпользователь: 
-                              логин: admin@test.ru
-                              пароль: admin
-                              
-                              
-                              
-                              
-## Задание 
+<details><summary>## Задание на проект</summary> 
 
 Разработать сайт интернет-магазина.
 Должна быть реализована клиентская часть сервиса и интерфейс администрирования.
-
 
 ### Описание клиентской части
 
@@ -84,3 +97,4 @@
 
 * Реализовать механизм анонимных отзывов как показано на макете [Страница товара](./resources/phone.html).
 * Реализовать возможность регистрации по почте (без подтверждения почты).
+</details>
