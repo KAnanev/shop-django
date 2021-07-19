@@ -1,1 +1,1 @@
-web: gunicorn shop-django.wsgi
+web: gunicorn diplom_django_netology.wsgi
