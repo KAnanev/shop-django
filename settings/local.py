@@ -1,6 +1,6 @@
 from diplom_django_netology.settings import *
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['blooming-earth-46350.herokuapp.com']
 
 DEBUG = True
 
