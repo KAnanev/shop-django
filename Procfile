@@ -1,1 +1,0 @@
-web: gunicorn diplom_django_netology.wsgi
