@@ -1,4 +1,4 @@
-from diplom_django_netology.settings import *
+from config.settings import *
 
 ALLOWED_HOSTS = ['localhost', ]
 
