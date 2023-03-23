@@ -12,7 +12,7 @@
             <a href="{{ product.get_absolute_url}}">
                 <img src="{{ product.image.url }}" width="120" alt="{{ product.slug }}">
             </a>
-            {% include 'add_to_cart.html' %}
+            {% include 'cart/add_to_cart.html' %}
         </div>
     {% endfor %}
     </div>
