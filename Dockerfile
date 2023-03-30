@@ -22,7 +22,7 @@ RUN apk add --no-cache --virtual build-deps \
 
 COPY install-poetry.py /code/
 RUN export POETRY_HOME=/opt/poetry
-RUN python install-poetry.py --version 1.2.0
+RUN python code/install-poetry.py --version 1.2.0
 RUN $POETRY_HOME/bin/poetry --version
 
 # set work directory
