@@ -18,7 +18,7 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
 RUN apk add --no-cache --virtual build-deps \
     curl `#  poetry` \
     make gcc g++ `# make` \
-    libjpeg-turbo-dev zlib-dev libffi-dev cairo-dev libwebp-dev `# pillow` \
+    libjpeg-turbo-dev zlib-dev libffi-dev cairo-dev libwebp-dev `# pillow`
 
 RUN curl -sSL https://install.python-poetry.org | python -
 
