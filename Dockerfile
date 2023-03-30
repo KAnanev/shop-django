@@ -31,7 +31,7 @@ RUN apk add --no-cache \
     git `# dependencies` \
     libjpeg-turbo zlib libffi cairo libwebp `# pillow`
 
-RUN source $HOME/.poetry/env
+RUN export POETRY_HOME=/opt/poetry
 RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi
 RUN apk del --no-cache build-deps
