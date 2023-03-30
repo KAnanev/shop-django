@@ -20,9 +20,9 @@ RUN apk add --no-cache --virtual build-deps \
     make gcc g++ `# make` \
     libjpeg-turbo-dev zlib-dev libffi-dev cairo-dev libwebp-dev `# pillow`
 
-
-RUN curl -sSL https://install.python-poetry.org | python -
-RUN export PATH='/root/.local/bin:$PATH'
+RUN export POETRY_HOME=/opt/poetry
+RUN python install-poetry.py --version 1.2.0
+RUN $POETRY_HOME/bin/poetry --version
 
 # set work directory
 WORKDIR /code
