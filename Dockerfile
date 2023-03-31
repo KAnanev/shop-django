@@ -1,44 +1,31 @@
-# The base image we want to inherit from
-FROM python:3.10-alpine
-
+FROM python:3.11-slim
+WORKDIR /opt/app
 ARG DJANGO_ENV
 
-ENV PATH="${PATH}:/root/.poetry/bin"
+ENV DJANGO_SETTINGS_MODULE 'config.settings'
+# python:
+ENV  PYTHONFAULTHANDLER 1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONHASHSEED=random
+# poetry:
+ENV POETRY_HOME=/opt/poetry
+ENV POETRY_VIRTUALENVS_IN_PROJECT=false
+ENV PATH="$POETRY_HOME/bin:$PATH"
 
-ENV DJANGO_ENV=${DJANGO_ENV} \
-  # python:
-  PYTHONFAULTHANDLER=1 \
-  PYTHONUNBUFFERED=1 \
-  PYTHONHASHSEED=random \
-  # poetry:
-  POETRY_VIRTUALENVS_CREATE=false \
-  POETRY_CACHE_DIR='/var/cache/pypoetry'
-
-# System deps:
-RUN apk add --no-cache --virtual build-deps \
-    curl `#  poetry` \
-    make gcc g++ `# make` \
-    libjpeg-turbo-dev zlib-dev libffi-dev cairo-dev libwebp-dev `# pillow`
-
-COPY install-poetry.py /code/
 RUN export POETRY_HOME=/opt/poetry
-RUN python code/install-poetry.py --version 1.2.0
-RUN $POETRY_HOME/bin/poetry --version
+RUN python -m pip install --upgrade pip
+RUN pip install poetry
 
-# set work directory
-WORKDIR /code
-COPY pyproject.toml poetry.lock /code/
 
-# Install dependencies:
-RUN apk add --no-cache \
-    git `# dependencies` \
-    libjpeg-turbo zlib libffi cairo libwebp `# pillow`
 
+COPY pyproject.toml pyproject.toml
+COPY poetry.lock poetry.lock
 
 RUN poetry install --no-interaction --no-ansi
-RUN apk del --no-cache build-deps
 
-# copy project
-COPY . /code/
+COPY . .
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000", "--settings=settings.local"]
+EXPOSE 8000
+
+ENTRYPOINT ["poetry", "run", "gunicorn", "config.wsgi"]
+
