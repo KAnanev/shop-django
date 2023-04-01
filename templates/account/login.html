@@ -1,0 +1,38 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block title %}Вход{% endblock %}
+
+{% block form %}
+    <div>
+    {% if user.is_anonymous %}
+
+
+    <form class="form-signin" method="post" action="{% url 'login' %}">
+
+        {% if form.errors %}
+            <p class="alert-danger">Ваше имя пользователя и пароль не совпадают!!!<br>
+                Пожалуйста, попробуйте еще раз.</p>
+        {% endif %}
+
+        <input type="hidden" name="next" value="{{ next }}">
+        <img class="mb-4" src="{%static 'logo.svg'%}" alt="" width="72" height="72">
+            {% csrf_token %}
+
+        <h1 class="h3 mb-3 font-weight-normal">Вход</h1>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="username"
+             value="" required="" autofocus="" data-cip-id="inputEmail">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль"
+             name="password" required="" data-cip-id="inputPassword">
+
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+    </form>
+    {% else %}
+        <p class="text-success">{{ user|upper }}, Вы уже зарегистрированы. <br> <a href="/static">На главную.</a></p>
+    {% endif %}
+        <p class="mt-5 mb-3 text-muted">© Просто магазин 2020</p>
+    </div>
+{% endblock %}

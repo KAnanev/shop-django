@@ -51,7 +51,7 @@ def view_cart(request):
 
         context['cart'] = cart
 
-    return render(request, 'cart.html', context)
+    return render(request, 'cart/cart.html', context)
 
 
 @login_required(login_url='login')
